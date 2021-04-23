@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href='./index.css'/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUNO</title>
+    <script src='./clock.js' defer></script>
+    <script src='./weather.js' defer></script>
+</head>
+<body>
+    <!-- analog_clock 은 시계의 바탕(동그라미)이고, hour, minute, second는 각 바늘입니다 -->
+    <header class='header'></header>
+    <div class='clock'>
+        <div class="analog">
+            <div class='analog_clock'>
+                <div class="analog_hour"></div>
+                <div class="analog_minute"></div>
+                <div class="analog_second"></div>
+            </div>
+        </div>
+        <div class="digital">
+            <span class='digital_clock'></span>
+            <span class='digital_type'></span>
+        </div>
+    </div>
+    <div class='weather'>
+        <div class='weather_temp'></div>
+        <div class='weather_min'></div>
+        <div class='weather_max'></div>
+        <div class='weather_humid'></div>
+        <div class='weather_wind'></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  color: white;
+}
+
+.analog_clock {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-color: #000000;
+  position: relative;
+  border: 0.5px solid gray;
+}
+
+.analog_hour,
+.analog_minute,
+.analog_second {
+  height: 2px; /* 바늘의 두께 */
+  border-radius: 1px;
+  position: relative;
+  transform-origin: 100%; /* 오른쪽 끝을 기준으로 회전 */
+}
+
+.analog_hour {
+  z-index: 2;
+  width: 60px;
+  top: 100px;
+  left: 40px;
+  background-color: #ffffff;
+}
+
+.analog_minute {
+  z-index: 1;
+  width: 90px;
+  top: 98px;
+  left: 10px;
+  background-color: #ffffff;
+}
+
+.analog_second {
+  z-index: 3;
+  width: 90px;
+  top: 96px;
+  left: 10px;
+  background-color: #ff0000;
+}
+
+.digital {
+  margin-top: 30px;
+  font-size: 20px;
+}
