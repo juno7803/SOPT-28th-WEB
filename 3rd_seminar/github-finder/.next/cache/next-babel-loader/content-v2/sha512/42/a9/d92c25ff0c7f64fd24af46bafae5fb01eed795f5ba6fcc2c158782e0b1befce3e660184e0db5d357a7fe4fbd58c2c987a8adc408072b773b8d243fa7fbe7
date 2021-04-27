@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createGlobalStyle } from \"styled-components\";\nimport { reset } from \"styled-reset\";\nexport const GlobalStyle = createGlobalStyle`\n    ${reset}\n    *{\n        box-sizing: border-box;\n    }\n`;","map":null,"metadata":{},"sourceType":"module"}

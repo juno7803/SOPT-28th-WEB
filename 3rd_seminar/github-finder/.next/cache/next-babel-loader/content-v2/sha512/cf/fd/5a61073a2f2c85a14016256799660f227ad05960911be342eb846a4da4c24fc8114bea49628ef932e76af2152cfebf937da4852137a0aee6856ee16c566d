@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\n\nconst Index = () => {\n  return /*#__PURE__*/_jsx(\"div\", {\n    children: \"NEXT\"\n  });\n};\n\nexport default Index;","map":null,"metadata":{},"sourceType":"module"}
