@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SearchBar, UserCard } from "./components";
 import { getUserData } from "./lib/api";
+import { IUserData } from "./types";
 
 const App = () => {
-  const [userData, setUserData] = useState(undefined);
+  const [userData, setUserData] = useState<IUserData | undefined>(undefined);
 
   const getData = async (userName: string) => {
     const data = await getUserData(userName);
