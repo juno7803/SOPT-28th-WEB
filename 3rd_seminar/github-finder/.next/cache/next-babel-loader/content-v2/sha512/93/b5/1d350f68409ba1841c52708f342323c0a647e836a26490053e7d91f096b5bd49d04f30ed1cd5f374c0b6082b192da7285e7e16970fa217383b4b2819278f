@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var theme = {};\n\nvar customMediaQuery = function customMediaQuery(maxWidth) {\n  return \"@media (max-width: \".concat(maxWidth, \"px)\");\n};\n\nexport var media = {\n  custom: customMediaQuery,\n  1440: customMediaQuery(1440),\n  768: customMediaQuery(768),\n  mobile: customMediaQuery(576)\n};","map":null,"metadata":{},"sourceType":"module"}

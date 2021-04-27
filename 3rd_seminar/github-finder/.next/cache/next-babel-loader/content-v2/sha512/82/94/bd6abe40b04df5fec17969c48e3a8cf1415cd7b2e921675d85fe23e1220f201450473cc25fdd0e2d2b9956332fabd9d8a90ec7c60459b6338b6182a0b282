@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const theme = {};\n\nconst customMediaQuery = maxWidth => `@media (max-width: ${maxWidth}px)`;\n\nexport const media = {\n  custom: customMediaQuery,\n  1440: customMediaQuery(1440),\n  768: customMediaQuery(768),\n  mobile: customMediaQuery(576)\n};","map":null,"metadata":{},"sourceType":"module"}
