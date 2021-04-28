@@ -1,6 +1,12 @@
 import { DefaultTheme } from "styled-components";
 
-export const theme: DefaultTheme = {};
+export const theme: DefaultTheme = {
+  color: {
+    black_1: "#363636",
+    orange: "#ff7134",
+    gray_2: "#f3f3f3",
+  },
+};
 
 const customMediaQuery = (maxWidth: number): string =>
   `@media (max-width: ${maxWidth}px)`;
