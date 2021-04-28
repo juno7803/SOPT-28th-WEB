@@ -1,4 +1,4 @@
-import { UserCard } from "../components";
+import { UserCard } from "../../components";
 
 const Result = () => {
   return (
