@@ -1,6 +1,12 @@
+import React from "react";
+import { SearchBar } from "../components";
+
 const Index = () => {
-  return <div>NEXT</div>;
+  return (
+    <React.Fragment>
+      <SearchBar />
+    </React.Fragment>
+  );
 };
 
 export default Index;
-// localhost: 3000
