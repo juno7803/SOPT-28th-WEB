@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+### 🙆🏻‍♂️ 3차 과제 GithubFinder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**기본 과제 구현 화면**
+![githubFinder](https://user-images.githubusercontent.com/26808056/116347333-f7876000-a826-11eb-9d08-bc0cec2ef4e3.gif)
 
-## Available Scripts
+- 메인 페이지('index.html/3000') 에서 `SearchBar.tsx` 불러옴, 아이디 입력 시 `result/userId ` 로 이동
+- 결과 페이지(`localhost:3000/result/userId?=${userId}`) 로 이동하여 결과(`UserCard.tsx`)를 보여줌
+- 닫기 버튼을 누르면 메인 페이지로 다시 이동
 
-In the project directory, you can run:
+**📚 사용 스택**
 
-### `yarn start`
+- next.js
+- typescript
+- swr
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**🗂 폴더 구조**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+github-finder
+├─ components
+│  ├─ result
+│  │  └─ UserCard.tsx
+│  ├─ SearchBar.tsx
+│  └─ index.ts
+├─ lib
+│  └─ api
+│     └─ index.ts
+├─ pages
+│  ├─ _app.tsx
+│  ├─ _document.tsx
+│  ├─ index.scss
+│  ├─ index.tsx
+│  └─ result.tsx
+├─ public
+│  └─ images
+├─ styles
+│  ├─ global-style.ts
+│  ├─ styled.d.ts
+│  └─ theme.ts
+├─ types
+│  └─ index.ts
+├─ README.md
+├─ next-env.d.ts
+├─ next.config.js
+├─ package.json
+├─ tsconfig.json
+└─ yarn.lock
+```
