@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IUserData } from "../../types";
+import { Card } from "../common";
 import { client } from "../../lib/api";
-import { AxiosResponse, AxiosError } from "axios";
+import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import useSWR from "swr";
 
 interface IUserCardData {
   data?: AxiosResponse<IUserData>;
   error?: any;
 }
-// Todo: Card 컴포넌트화 -> 여기 페이지 이름 Result.tsx 로 바꾸기
+
 const UserCard = () => {
   const router = useRouter();
   const fetcher = (url: string) => client.get(url);
@@ -40,42 +41,37 @@ const UserCard = () => {
 
   if (userError || reposError) {
     return (
-      <Container>
-        <Wrapper>User Not Found!</Wrapper>
-      </Container>
+      <Card>
+        <StatusMessage>User Not Found!</StatusMessage>
+      </Card>
     );
   }
   if (!user || !repos) {
     return (
-      <Container>
-        <Wrapper>Loading ...</Wrapper>
-      </Container>
+      <Card>
+        <StatusMessage>Loading ...</StatusMessage>
+      </Card>
     );
   }
 
   return (
-    <Container>
-      <Wrapper>
-        <Header>
-          <div className="card__title">
-            {user?.data.name} ({user?.data.login})
-          </div>
-          <div className="card__button" onClick={handleClickButton}>
-            닫기
-          </div>
-        </Header>
-        <Content>
-          <img className="card__img" src={user?.data.avatar_url} />
-          <div className="card__desc" style={{ marginTop: "2rem" }}>
-            <div className="card__desc bio">{user?.data.bio}</div>
-            <a
-              className="card__desc blog"
-              href={user?.data.blog}
-              target="_blank"
-            >
-              {user?.data.blog}
-            </a>
-            {/* {repos?.data.slice(0, 10).map((repo: any, index: number) => (
+    <Card>
+      <Header>
+        <div className="card__title">
+          {user?.data.name} ({user?.data.login})
+        </div>
+        <div className="card__button" onClick={handleClickButton}>
+          닫기
+        </div>
+      </Header>
+      <Content>
+        <img className="card__img" src={user?.data.avatar_url} />
+        <div className="card__desc" style={{ marginTop: "2rem" }}>
+          <div className="card__desc bio">{user?.data.bio}</div>
+          <a className="card__desc blog" href={user?.data.blog} target="_blank">
+            {user?.data.blog}
+          </a>
+          {/* {repos?.data.slice(0, 10).map((repo: any, index: number) => (
               <>
                 <Repository href={repo.html_url} key={index}>
                   {repo.name}
@@ -83,22 +79,29 @@ const UserCard = () => {
                 <br />
               </>
             ))} */}
-          </div>
-          <GithubButton onClick={handleClickGithubBtn}>
-            깃허브 방문하기
-          </GithubButton>
-        </Content>
-        <Footer>
-          <div className="item">Followers :{user?.data.followers}</div>
-          <div className="item">Following :{user?.data.following}</div>
-          <div className="item">Repos :{user?.data.public_repos}</div>
-        </Footer>
-      </Wrapper>
-    </Container>
+        </div>
+        <GithubButton onClick={handleClickGithubBtn}>
+          깃허브 방문하기
+        </GithubButton>
+      </Content>
+      <Footer>
+        <div>Followers :{user?.data.followers}</div>
+        <div>Following :{user?.data.following}</div>
+        <div>Repos :{user?.data.public_repos}</div>
+      </Footer>
+    </Card>
   );
 };
 
 export default UserCard;
+
+const StatusMessage = styled.div`
+  font-size: 2rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const GithubButton = styled.div`
   transition: all 0.3s;
@@ -126,26 +129,8 @@ const Footer = styled.div`
   justify-content: space-around;
   width: 100%;
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;
   color: ${({ theme }) => theme.color.black_1};
-`;
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50rem;
-  min-height: 60rem;
-  padding: 3rem 3rem;
-  background-color: #f3f3f3;
-  border-radius: 1.6rem;
 `;
 
 const Header = styled.div`
@@ -203,7 +188,7 @@ const Content = styled.div`
   }
 `;
 
-const Repository = styled.a`
-  margin-top: 1rem;
-  font-size: 1.6rem;
-`;
+// const Repository = styled.a`
+//   margin-top: 1rem;
+//   font-size: 1.6rem;
+// `;
