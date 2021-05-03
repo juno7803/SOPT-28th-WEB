@@ -46,6 +46,7 @@ const SearchBar = () => {
     const filterList = JSON.parse(
       localStorage.getItem("userId") || "[]"
     ).filter((list: IList) => list.userId !== userId);
+
     // 검색어 추가 : 가장 최근 검색 3개 까지만 유지
     const newList = [...filterList, listItem];
     if (newList.length > MAX_NUM) {
