@@ -1,12 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { dateState } from "../../states";
-import styled from "styled-components";
-import LeftOff from "../../assets/leftoff.svg";
-import LeftOn from "../../assets/left.svg";
-import RightOff from "../../assets/rightoff.svg";
-import RightOn from "../../assets/right.svg";
-import useSWR from "swr";
+import { Left, LeftOff, Right, RightOff } from "../../assets";
 
 const monthList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
@@ -30,7 +26,7 @@ const Calender = () => {
             alt=""
             onClick={minusYear}
             // Todo: e의 type 찾기(e.target.src에 접근 가능한)
-            onMouseEnter={(e: any) => (e.target.src = LeftOn)}
+            onMouseEnter={(e: any) => (e.target.src = Left)}
             onMouseLeave={(e: any) => (e.target.src = LeftOff)}
           />
           <div className="calender__year--title">{date.year}년</div>
@@ -39,7 +35,7 @@ const Calender = () => {
             src={RightOff}
             alt=""
             onClick={plusYear}
-            onMouseEnter={(e: any) => (e.target.src = RightOn)}
+            onMouseEnter={(e: any) => (e.target.src = Right)}
             onMouseLeave={(e: any) => (e.target.src = RightOff)}
           />
         </div>
