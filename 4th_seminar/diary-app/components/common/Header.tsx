@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-// import Menu from "../../assets/menu.svg";
+import { Menu } from "../../assets";
 
 const Header = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <HeaderWrap>
       <div className="header">
-        <img className="header__menu" src={""} alt="" />
+        <img className="header__menu" src={Menu} alt="" />
         <div className="header__title" onClick={onClickTitle}>
           Diary App
         </div>

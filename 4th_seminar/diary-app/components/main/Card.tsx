@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { getDateFormat } from "../../lib/utils/date";
-import EmptyImage from "../../assets/photo.svg";
+import { Photo } from "../../assets";
 import { IData } from "../../types";
 
 interface ICard {
@@ -16,7 +16,7 @@ const Card = ({ userData }: ICard) => {
           {userData ? (
             <img className="card__image--photo" src={userData.image} alt="" />
           ) : (
-            <img className="card__image--empty" src={EmptyImage} alt="" />
+            <img className="card__image--empty" src={Photo} alt="" />
           )}
         </div>
         <div className="card__top">
@@ -26,7 +26,6 @@ const Card = ({ userData }: ICard) => {
         <div className="card__title">{userData.title}</div>
         <div className="card__tags">
           {userData.tags.map((tag: string, index: number) => {
-            // tag가 list 형식으로 저장되어있기 때문에 map을 사용합니다
             return (
               <div key={index} className="card__tags--tag">
                 {tag}

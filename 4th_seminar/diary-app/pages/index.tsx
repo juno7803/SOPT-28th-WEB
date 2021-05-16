@@ -19,12 +19,14 @@ const Main = () => {
       <Container>
         {!data && <div>Loading...</div>}
         {error && <div>Error!!</div>}
-        {user?.data.data[date.year] &&
-          user.data.data[date.year][
-            date.month
-          ].map((userData: IData, index: number) => (
-            <Card userData={userData} key={index} />
-          ))}
+        <CardContainer>
+          {user?.data.data[date.year] &&
+            user.data.data[date.year][
+              date.month
+            ].map((userData: IData, index: number) => (
+              <Card userData={userData} key={index} />
+            ))}
+        </CardContainer>
       </Container>
     </MainWrap>
   );
@@ -36,4 +38,10 @@ export default Main;
 const MainWrap = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const CardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 24px;
 `;
