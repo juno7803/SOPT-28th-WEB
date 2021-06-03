@@ -63,6 +63,7 @@ const CardWrap = styled.div`
         height: inherit;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
+        // inherit: 부모의 요소 그대로 받아옴
       }
     }
 

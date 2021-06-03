@@ -28,3 +28,8 @@ export interface IData {
   weather: string;
   tags: string[];
 }
+
+export interface IDateState {
+  year: number;
+  month: number;
+}

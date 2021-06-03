@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Calender, Footer, Header, Title } from "./";
+import { Calender, Footer, Header, Title } from "../index";
 
 const Container: React.FC = ({ children }) => {
   return (
