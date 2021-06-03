@@ -11,6 +11,7 @@ const Footer = () => {
 };
 
 export default Footer;
+
 const FooterWrap = styled.div`
   .footer {
     height: 91px;

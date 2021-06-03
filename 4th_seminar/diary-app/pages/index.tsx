@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Container } from "../components/common";
-import Card from "../components/main/Card";
+import { Card, Container, NewCard } from "../components";
 import { useRecoilValue } from "recoil";
 import { dateState } from "../states";
 import useSWR from "swr";
@@ -20,12 +19,12 @@ const Main = () => {
         {!data && <div>Loading...</div>}
         {error && <div>Error!!</div>}
         <CardContainer>
-          {user?.data.data[date.year] &&
-            user.data.data[date.year][
-              date.month
-            ].map((userData: IData, index: number) => (
+          {user?.data?.data?.[date.year][date.month].map(
+            (userData: IData, index: number) => (
               <Card userData={userData} key={index} />
-            ))}
+            )
+          )}
+          <NewCard />
         </CardContainer>
       </Container>
     </MainWrap>
