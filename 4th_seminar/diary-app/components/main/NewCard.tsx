@@ -5,23 +5,11 @@ import useSWR, { mutate } from "swr";
 import { client } from "../../lib/api";
 import post from "../../lib/api/post";
 import { dateState } from "../../states";
-import { IDiary } from "../../types";
-
-interface ICardForm {
-  date: number;
-  id: number;
-  title: string;
-  image: string;
-  weather: string;
-  tags: string[];
-  summary: string;
-  text: string;
-}
+import { ICardForm, IDiary } from "../../types";
 
 const NewCard = () => {
   const date = useRecoilValue(dateState);
-  const fetcher = (url: string) => client.get(url);
-  const { data, error }: any = useSWR("/posts", fetcher);
+  const { data, error }: any = useSWR("/posts");
   const user: IDiary = data?.data?.data;
 
   const getDate = () => {
@@ -33,6 +21,7 @@ const NewCard = () => {
     const dayFormat = day.length < 2 ? 0 + day : day;
     return parseInt(`${year}${monthFormat}${dayFormat}`);
   };
+  // NewCard 호출될 때 마다 새로 연산하는 것 방지
   const getDateMemo = useMemo(() => getDate, []);
 
   const createCard = async () => {

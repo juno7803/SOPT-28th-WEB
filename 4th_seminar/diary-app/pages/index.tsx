@@ -4,43 +4,41 @@ import { Card, Container, NewCard } from "../components";
 import { useRecoilValue } from "recoil";
 import { dateState } from "../states";
 import useSWR from "swr";
-import { client } from "../lib/api";
 import { IDiary, IData } from "../types";
 
 const Main = () => {
   const date = useRecoilValue(dateState);
-  const fetcher = (url: string) => client.get(url);
-  const { data, error }: any = useSWR("/posts", fetcher);
+  const { data, error }: any = useSWR("/posts");
   const user: IDiary = data;
 
   return (
-    <MainWrap>
+    <Styled.Main>
       <Container>
         {!data && <div>Loading...</div>}
         {error && <div>Error!!</div>}
-        <CardContainer>
+        <Styled.CardContainer>
           {user?.data?.data?.[date.year][date.month].map(
             (userData: IData, index: number) => (
               <Card userData={userData} key={index} />
             )
           )}
           <NewCard />
-        </CardContainer>
+        </Styled.CardContainer>
       </Container>
-    </MainWrap>
+    </Styled.Main>
   );
 };
 
 export default Main;
-// next라서 Header ~ Footer를 컴포넌트화 시켜야 할 듯
 
-const MainWrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const CardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 24px;
-`;
+const Styled = {
+  Main: styled.div`
+    display: flex;
+    justify-content: center;
+  `,
+  CardContainer: styled.div`
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 24px;
+  `,
+};

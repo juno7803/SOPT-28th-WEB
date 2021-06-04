@@ -33,3 +33,14 @@ export interface IDateState {
   year: number;
   month: number;
 }
+
+export interface ICardForm {
+  date: number;
+  id: number;
+  title: string;
+  image: string;
+  weather: string;
+  tags: string[];
+  summary: string;
+  text: string;
+}

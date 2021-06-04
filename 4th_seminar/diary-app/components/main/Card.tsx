@@ -3,15 +3,21 @@ import styled from "styled-components";
 import { getDateFormat } from "../../lib/utils/date";
 import { Photo } from "../../assets";
 import { IData } from "../../types";
+import { useRouter } from "next/router";
 
 interface ICard {
   userData: IData;
 }
 
 const Card = ({ userData }: ICard) => {
+  const router = useRouter();
+  const onClickCard = () => {
+    router.push(`/diary/${userData.id}`);
+  };
+
   return (
     <CardWrap>
-      <div className="card">
+      <div className="card" onClick={onClickCard}>
         <div className="card__image">
           {userData ? (
             <img className="card__image--photo" src={userData.image} alt="" />

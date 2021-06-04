@@ -5,3 +5,6 @@ export { default as Header } from "./common/Header";
 export { default as Container } from "./common/Container";
 export { default as Card } from "./main/Card";
 export { default as NewCard } from "./main/NewCard";
+export { default as DiaryCard } from "./diary/DiaryCard";
+export { default as CardInfo } from "./diary/CardInfo";
+export { default as CardHeader } from "./diary/CardHeader";
