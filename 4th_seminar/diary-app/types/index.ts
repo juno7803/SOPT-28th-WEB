@@ -5,6 +5,7 @@ export interface IDiary {
     };
   };
 }
+
 interface IMonth {
   0: Array<IData>;
   1: Array<IData>;

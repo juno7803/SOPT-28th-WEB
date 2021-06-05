@@ -2,13 +2,12 @@ import React, { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import useSWR, { mutate } from "swr";
-import { client } from "../../lib/api";
 import post from "../../lib/api/post";
 import { dateState } from "../../states";
 import { ICardForm, IDiary } from "../../types";
 
 const NewCard = () => {
-  const date = useRecoilValue(dateState);
+  const { year, month } = useRecoilValue(dateState);
   const { data, error }: any = useSWR("/posts");
   const user: IDiary = data?.data?.data;
 
@@ -26,7 +25,7 @@ const NewCard = () => {
 
   const createCard = async () => {
     const cardForm: ICardForm = {
-      id: user?.[date.year][date.month].length + 1,
+      id: user?.[year][month].length + 1,
       date: getDateMemo(),
       title: "",
       image: "",
@@ -38,9 +37,9 @@ const NewCard = () => {
     if (user) {
       const userData = {
         ...user,
-        [date.year]: {
-          ...user[date.year],
-          [date.month]: [...user[date.year][date.month], cardForm],
+        [year]: {
+          ...user[year],
+          [month]: [...user[year][month], cardForm],
         },
       };
       await post.postCard(userData);

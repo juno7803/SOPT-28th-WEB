@@ -1,34 +1,119 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📔 Diary App
 
-## Getting Started
-
-First, run the development server:
+## 🏃🏻‍♂️ 시작하기
 
 ```bash
-npm run dev
-# or
-yarn dev
+yarn dev # run next project
+npx json-server --watch data.json --port 4000 # run json server
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🖥 구현 화면
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 1️⃣ 카드 추가하기
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![add_card_diaryapp](https://user-images.githubusercontent.com/26808056/120882304-c104e800-c611-11eb-826b-598f0b8871cb.gif)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```tsx
+const userData = {
+  ...user,
+  [year]: {
+    ...user[year],
+    [month]: [...user[year][month], cardForm],
+  },
+}; // 불변성을 지키기 위해 배열을 복사하여 사용
+await post.postCard(userData); // post 요청
+mutate("/posts", userData); // swr의 mutate 함수를 통해 자동으로 revalidation 하여 optimistic ui 적용할 필요 없음
+```
 
-## Learn More
+### 2️⃣ 카드 삭제하기
 
-To learn more about Next.js, take a look at the following resources:
+![delete_card_diaryapp](https://user-images.githubusercontent.com/26808056/120882309-c3ffd880-c611-11eb-8215-54f6b332de29.gif)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3️⃣ 카드 수정하기
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![edit_card_diaryapp](https://user-images.githubusercontent.com/26808056/120882314-c6623280-c611-11eb-918a-984f0b33230e.gif)
 
-## Deploy on Vercel
+```tsx
+const [isReadOnly, setIsReadOnly] = useState(true); // isReadOnly를 state로 두어 라우팅을 추가로 하지 않고 구현
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 그 외 특징
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 서버에서 받아오는 global data는 `useSWR` 을 이용하여 데이터 캐싱
+- post 요청에 대해서는 `axios ` 만을 이용하되, SWR의 mutate를 이용하여 데이터 갱신
+- `SWRConfig`를 이용하여 공통 default 옵션을 지정하여 사용
+- local global state는 recoil로 관리(`date`)
+
+## 📚 사용 스택
+
+```bash
+React.js
+Next.js
+Typescript
+SWR
+Recoil
+```
+
+## 🗂 폴더 구조
+
+```plain text
+diary-app
+├─ assets
+│  ├─ index.ts
+│  ├─ left.svg
+│  ├─ leftoff.svg
+│  ├─ menu.svg
+│  ├─ photo.svg
+│  ├─ profile_img.svg
+│  ├─ right.svg
+│  ├─ rightoff.svg
+│  └─ select.svg
+├─ components
+│  ├─ common
+│  │  ├─ Calender.tsx
+│  │  ├─ Container.tsx
+│  │  ├─ Footer.tsx
+│  │  ├─ Header.tsx
+│  │  └─ Title.tsx
+│  ├─ diary
+│  │  ├─ CardHeader.tsx
+│  │  ├─ CardInfo.tsx
+│  │  └─ DiaryCard.tsx
+│  ├─ main
+│  │  ├─ Card.tsx
+│  │  └─ NewCard.tsx
+│  └─ index.ts
+├─ lib
+│  ├─ api
+│  │  ├─ index.ts
+│  │  └─ post.ts
+│  └─ utils
+│     └─ date.ts
+├─ pages
+│  ├─ diary
+│  │  └─ [id].tsx
+│  ├─ _app.tsx
+│  ├─ _document.tsx
+│  ├─ index.scss
+│  └─ index.tsx
+├─ public
+│  ├─ favicon.ico
+│  └─ vercel.svg
+├─ states
+│  └─ index.ts
+├─ styles
+│  ├─ global-style.ts
+│  ├─ styled.d.ts
+│  └─ theme.ts
+├─ types
+│  └─ index.ts
+├─ README.md
+├─ data.json
+├─ index.d.ts
+├─ next-env.d.ts
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ tsconfig.json
+└─ yarn.lock
+```
