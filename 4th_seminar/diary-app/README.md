@@ -14,15 +14,31 @@ npx json-server --watch data.json --port 4000 # run json server
 ![add_card_diaryapp](https://user-images.githubusercontent.com/26808056/120882304-c104e800-c611-11eb-826b-598f0b8871cb.gif)
 
 ```tsx
+// (1) 불변성을 지키기 위해 spread 문법을 사용하여 깊은 복사를 통해 구현
+const newData = user[year][month].concat(cardForm);
 const userData = {
   ...user,
   [year]: {
     ...user[year],
-    [month]: [...user[year][month], cardForm],
+    [month]: newData,
   },
-}; // 불변성을 지키기 위해 배열을 복사하여 사용
+};
 await post.postCard(userData); // post 요청
 mutate("/posts", userData); // swr의 mutate 함수를 통해 자동으로 revalidation 하여 optimistic ui 적용할 필요 없음
+```
+
+```bash
+yarn add lodash @types/lodash
+```
+
+```tsx
+// (2) 불변성을 지키기 위해 js 라이브러리인 lodash를 사용하여 깊은 복사를 통해 구현
+import { cloneDeep } from "lodash";
+
+const userData = cloneDeep(user); // user 객체를 깊은 복사하여 userData에 저장
+userData[year][month].push(cardForm); // userData[year][month] 프로퍼티에 cardForm push로 추가
+await post.postCard(userData);
+mutate("/posts", userData);
 ```
 
 ### 2️⃣ 카드 삭제하기
