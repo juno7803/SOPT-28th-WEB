@@ -29,11 +29,17 @@ const DiaryCard = ({ data, rawData }: IDiaryCard) => {
   };
 
   const handleEdit = async () => {
-    const index = rawData[year][month].findIndex(
-      (data: ICardForm) => data.id === parseInt(id)
+    const newData = rawData[year][month].map((e: ICardForm) =>
+      e.id === parseInt(id) ? state : e
     );
-    rawData[year][month][index] = state;
-    await post.postCard(rawData);
+    const editData = {
+      ...rawData,
+      [year]: {
+        ...rawData[year],
+        [month]: newData,
+      },
+    };
+    await post.postCard(editData);
     setIsReadOnly(true);
   };
 

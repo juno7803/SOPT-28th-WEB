@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import React, { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -35,13 +36,16 @@ const NewCard = () => {
       text: "",
     };
     if (user) {
+      const newData = user[year][month].concat(cardForm);
       const userData = {
         ...user,
         [year]: {
           ...user[year],
-          [month]: [...user[year][month], cardForm],
+          [month]: newData,
         },
       };
+      // const userData = cloneDeep(user);
+      // userData[year][month].push(cardForm);
       await post.postCard(userData);
       // post 한 결과로 자동 validation -> 기본 옵션 : true
       mutate("/posts", userData);
