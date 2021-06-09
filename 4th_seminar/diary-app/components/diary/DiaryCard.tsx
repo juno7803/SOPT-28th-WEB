@@ -6,6 +6,7 @@ import post from "../../lib/api/post";
 import { ICardForm, IDiary } from "../../types";
 import { useRecoilValue } from "recoil";
 import { dateState } from "../../states";
+import { mutate } from "swr";
 
 interface IDiaryCard {
   data: ICardForm;
@@ -18,7 +19,8 @@ const DiaryCard = ({ data, rawData }: IDiaryCard) => {
   const [isReadOnly, setIsReadOnly] = useState(true);
   const id = router.query.id as string;
 
-  const [state, setState] = useState(data);
+  const [state, setState] = useState<ICardForm>(data);
+  const [userImg, setUserImg] = useState(null);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -26,6 +28,23 @@ const DiaryCard = ({ data, rawData }: IDiaryCard) => {
       ...state,
       [name]: event.target.value,
     });
+  };
+
+  const handleChangeFile = (event) => {
+    let reader = new FileReader();
+    const data = event.target.files[0]; // 받아온 이미지는 여기에 File 객체로 저장됩니다
+
+    if (data) {
+      reader.readAsDataURL(data);
+    }
+    reader.onloadend = () => {
+      setUserImg({
+        file: data,
+        preview: reader.result,
+      });
+      // 미리보기 이미지 변경을 위한 state
+      setState({ ...state, image: reader.result as string });
+    };
   };
 
   const handleEdit = async () => {
@@ -63,9 +82,11 @@ const DiaryCard = ({ data, rawData }: IDiaryCard) => {
         setIsReadOnly={setIsReadOnly}
       />
       <CardInfo
-        data={state}
+        cardData={state}
         isReadOnly={isReadOnly}
         handleChange={handleChange}
+        handleChangeFile={handleChangeFile}
+        userImg={userImg}
       />
       <textarea
         placeholder="오늘을 기록해 주세요"

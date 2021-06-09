@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Styled from "styled-components";
 import { Photo } from "../../assets";
 import FormControl from "@material-ui/core/FormControl";
@@ -8,26 +8,53 @@ import InputBase from "@material-ui/core/InputBase";
 import Select from "../../assets/Select.svg";
 import { getDateFormat } from "../../lib/utils/date";
 import { ICardForm } from "../../types";
+import post from "../../lib/api/post";
+import { useRecoilValue } from "recoil";
+import { dateState } from "../../states";
+import useSWR, { mutate } from "swr";
 
 interface ICardInfo {
-  data: ICardForm;
+  cardData: ICardForm;
   isReadOnly: boolean;
   handleChange: (event: any) => void;
+  handleChangeFile: (event: any) => void;
+  userImg: {
+    file: string | ArrayBuffer;
+    preview: string;
+  };
 }
 
-const CardInfo = ({ data, isReadOnly, handleChange }: ICardInfo) => {
+const CardInfo = ({
+  cardData,
+  isReadOnly,
+  handleChange,
+  handleChangeFile,
+  userImg,
+}: ICardInfo) => {
   const classes = useStyles();
-  const { image, date, weather, tags, summary } = data;
+  const { image, date, weather, tags, summary } = cardData;
 
   return (
     <CardInfoWrap>
       <div className="info__photo">
-        <img
-          src={image ? image : Photo}
-          width={image && "210px"}
-          height={image && "210px"}
-          alt=""
-        />
+        {!isReadOnly && (
+          <input
+            type="file"
+            name="ImageUpload"
+            accept="image/*"
+            onChange={handleChangeFile}
+            id="input-file"
+            style={{ display: "none" }}
+          />
+        )}
+        <label htmlFor="input-file" style={{ cursor: "pointer" }}>
+          <img
+            src={userImg ? userImg.preview : image ? image : Photo}
+            width={image && "210px"}
+            height={image && "210px"}
+            alt=""
+          />
+        </label>
       </div>
       <div className="info__data-wrap">
         <p className="info__date">
