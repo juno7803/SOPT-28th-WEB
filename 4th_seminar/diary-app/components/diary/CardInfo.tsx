@@ -8,10 +8,6 @@ import InputBase from "@material-ui/core/InputBase";
 import Select from "../../assets/Select.svg";
 import { getDateFormat } from "../../lib/utils/date";
 import { ICardForm } from "../../types";
-import post from "../../lib/api/post";
-import { useRecoilValue } from "recoil";
-import { dateState } from "../../states";
-import useSWR, { mutate } from "swr";
 
 interface ICardInfo {
   cardData: ICardForm;
