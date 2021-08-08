@@ -1,2 +1,2 @@
 # SOPT-28th-WEB
-28th web assignment repository (~2021.06)
+28th web assignment repository ( ~2021.06)
